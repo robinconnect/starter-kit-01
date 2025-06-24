@@ -20,7 +20,7 @@ type Props = {
 	tag: string;
 };
 
-export default function Post({ publication, posts, tag }: Props) {
+export default function TagPage({ publication, posts, tag }: Props) {
 	const title = `#${tag} - ${publication.title}`;
 	return (
 		<AppProvider publication={publication}>
