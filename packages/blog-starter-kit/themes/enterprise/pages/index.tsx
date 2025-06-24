@@ -48,22 +48,31 @@ export default function Index({ publication, initialAllPosts, initialPageInfo }:
 	const [loadedMore, setLoadedMore] = useState(false);
 
 	const loadMore = async () => {
-		const data = await request<MorePostsByPublicationQuery, MorePostsByPublicationQueryVariables>(
-			GQL_ENDPOINT,
-			MorePostsByPublicationDocument,
-			{
-				first: 10,
-				host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST,
-				after: pageInfo.endCursor,
-			},
-		);
-		if (!data.publication) {
+		if (!GQL_ENDPOINT || !process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST) {
+			console.error('Missing required environment variables for loadMore');
 			return;
 		}
-		const newPosts = data.publication.posts.edges.map((edge) => edge.node);
-		setAllPosts([...allPosts, ...newPosts]);
-		setPageInfo(data.publication.posts.pageInfo);
-		setLoadedMore(true);
+
+		try {
+			const data = await request<MorePostsByPublicationQuery, MorePostsByPublicationQueryVariables>(
+				GQL_ENDPOINT,
+				MorePostsByPublicationDocument,
+				{
+					first: 10,
+					host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST,
+					after: pageInfo.endCursor,
+				},
+			);
+			if (!data.publication) {
+				return;
+			}
+			const newPosts = data.publication.posts.edges.map((edge) => edge.node);
+			setAllPosts([...allPosts, ...newPosts]);
+			setPageInfo(data.publication.posts.pageInfo);
+			setLoadedMore(true);
+		} catch (error) {
+			console.error('Error loading more posts:', error);
+		}
 	};
 
 	const firstPost = allPosts[0];
@@ -189,29 +198,44 @@ export default function Index({ publication, initialAllPosts, initialPageInfo }:
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-	const data = await request<PostsByPublicationQuery, PostsByPublicationQueryVariables>(
-		GQL_ENDPOINT,
-		PostsByPublicationDocument,
-		{
-			first: 10,
-			host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST,
-		},
-	);
-
-	const publication = data.publication;
-	if (!publication) {
+	// Check if required environment variables are set
+	if (!GQL_ENDPOINT || !process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST) {
+		console.error('Missing required environment variables: NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT and NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST');
 		return {
 			notFound: true,
 		};
 	}
-	const initialAllPosts = publication.posts.edges.map((edge) => edge.node);
 
-	return {
-		props: {
-			publication,
-			initialAllPosts,
-			initialPageInfo: publication.posts.pageInfo,
-		},
-		revalidate: 1,
-	};
+	try {
+		const data = await request<PostsByPublicationQuery, PostsByPublicationQueryVariables>(
+			GQL_ENDPOINT,
+			PostsByPublicationDocument,
+			{
+				first: 10,
+				host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST,
+			},
+		);
+
+		const publication = data.publication;
+		if (!publication) {
+			return {
+				notFound: true,
+			};
+		}
+		const initialAllPosts = publication.posts.edges.map((edge) => edge.node);
+
+		return {
+			props: {
+				publication,
+				initialAllPosts,
+				initialPageInfo: publication.posts.pageInfo,
+			},
+			revalidate: 1,
+		};
+	} catch (error) {
+		console.error('Error fetching publication data:', error);
+		return {
+			notFound: true,
+		};
+	}
 };
