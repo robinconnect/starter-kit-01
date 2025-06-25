@@ -29,7 +29,7 @@ export const Header = () => {
             return {
                 ...item,
                 children: [
-                    { label: "Sub 1", url: "/china-assistant/sub1" },
+                    { label: "Supply Chain Solutions", url: "https://robinconnect.com/testing-08" },
                     { label: "Sub 2", url: "/china-assistant/sub2" },
                     { label: "Sub 3", url: "/china-assistant/sub3" },
                 ]
@@ -71,8 +71,6 @@ export const Header = () => {
                                         <a
                                             key={subItem.url}
                                             href={subItem.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
                                             className={`block px-6 py-3 text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:bg-primary-50 dark:hover:bg-neutral-800 hover:text-primary-700 dark:hover:text-primary-400 transition-all duration-150 hover:pl-8 ${
                                                 index !== itemWithChildren.children.length - 1 ? 'border-b border-gray-50 dark:border-neutral-800' : ''
                                             }`}
@@ -91,8 +89,6 @@ export const Header = () => {
                     <li key={item.url} className="group">
                         <a
                             href={item.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
                             className="uppercase tracking-wide font-medium hover:text-primary-600 focus:outline-none group-hover:text-primary-600 group-hover:underline px-4 py-3 transition-all duration-200 text-sm"
                         >
                             {item.label}
