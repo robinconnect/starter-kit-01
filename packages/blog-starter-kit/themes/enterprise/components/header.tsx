@@ -28,7 +28,7 @@ export const Header = () => {
     };
 
     const navList = (
-        <ul className="flex flex-row items-center gap-2 text-white">
+        <ul className="flex flex-row items-center gap-2 text-neutral-900 dark:text-slate-300">
             {visibleItems.map((item) => (
                 <li key={item.url}>
                     <a
@@ -78,7 +78,7 @@ export const Header = () => {
     );
 
     return (
-        <header className="border-b bg-slate-950 py-10 dark:border-neutral-800 dark:bg-neutral-900">
+        <header className="border-b bg-white py-10 dark:border-neutral-800 dark:bg-neutral-900">
             <Container className="grid grid-cols-4 gap-5 px-5">
                 <div className="col-span-2 flex flex-1 flex-row items-center gap-2 lg:col-span-1">
                     <div className="lg:hidden">
@@ -94,17 +94,17 @@ export const Header = () => {
                             <PublicationSidebar navbarItems={navbarItems} toggleSidebar={toggleSidebar} />
                         )}
                     </div>
-                    <div className="hidden lg:block">
+                    <div className="hidden lg:block text-neutral-900 dark:text-slate-300">
                         <PublicationLogo />
                     </div>
                 </div>
-                <div className="col-span-2 flex flex-row items-center justify-end gap-5 text-slate-300 lg:col-span-3">
+                <div className="col-span-2 flex flex-row items-center justify-end gap-5 text-neutral-900 dark:text-slate-300 lg:col-span-3">
                     <nav className="hidden lg:block">{navList}</nav>
                     <Button href={baseUrl} as="a" type="primary" label="Book a demo" />
                     <ThemeToggle /> {/* Dark/Light mode button */}
                 </div>
             </Container>
-            <div className="mt-5 flex justify-center lg:hidden">
+            <div className="mt-5 flex justify-center lg:hidden text-neutral-900 dark:text-slate-300">
                 <PublicationLogo />
             </div>
         </header>
