@@ -16,6 +16,7 @@ import { ArticleSVG, ChevronDownSVG } from '../components/icons';
 import { Layout } from '../components/layout';
 import { MorePosts } from '../components/more-posts';
 import { Navbar } from '../components/navbar';
+import { PublicationAbout } from '../components/publication-about';
 import { SecondaryPost } from '../components/secondary-post';
 import {
 	MorePostsByPublicationDocument,
@@ -132,6 +133,9 @@ export default function Index({ publication, initialAllPosts, initialPageInfo }:
 				<Header />
 				<Container className="flex flex-col items-stretch gap-10 px-5 pb-10">
 					<Navbar />
+					
+					{/* Publication About Section */}
+					<PublicationAbout className="border-b border-gray-200 dark:border-neutral-800 pb-10" />
 
 					{allPosts.length === 0 && (
 						<div className="grid grid-cols-1 py-20 lg:grid-cols-3">
