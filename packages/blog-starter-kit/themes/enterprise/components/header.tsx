@@ -19,9 +19,27 @@ export const Header = () => {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '/';
     const [isSidebarVisible, setIsSidebarVisible] = useState<boolean>();
     const { publication } = useAppContext();
-    const navbarItems = publication.preferences.navbarItems.filter(hasUrl);
-    const visibleItems = navbarItems.slice(0, 3);
-    const hiddenItems = navbarItems.slice(3);
+    
+    // Get navbar items and add sub-menus
+    let navbarItems = publication.preferences.navbarItems.filter(hasUrl);
+    
+    // Add sub-menus to "China Assistant"
+    const navbarItemsWithSubMenus = navbarItems.map(item => {
+        if (item.label === "China Assistant") {
+            return {
+                ...item,
+                children: [
+                    { label: "Sub 1", url: "/china-assistant/sub1" },
+                    { label: "Sub 2", url: "/china-assistant/sub2" },
+                    { label: "Sub 3", url: "/china-assistant/sub3" },
+                ]
+            };
+        }
+        return item;
+    });
+    
+    const visibleItems = navbarItemsWithSubMenus.slice(0, 3);
+    const hiddenItems = navbarItemsWithSubMenus.slice(3);
 
     const toggleSidebar = () => {
         setIsSidebarVisible((prevVisibility) => !prevVisibility);
@@ -29,18 +47,57 @@ export const Header = () => {
 
     const navList = (
         <ul className="flex flex-row items-center gap-2 text-neutral-900 dark:text-slate-300">
-            {visibleItems.map((item) => (
-                <li key={item.url}>
-                    <a
-                        href={item.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="transition-200 block max-w-[200px] truncate text-ellipsis whitespace-nowrap rounded-full p-2 transition-colors hover:bg-white hover:text-black dark:hover:bg-neutral-800 dark:hover:text-white"
-                    >
-                        {item.label}
-                    </a>
-                </li>
-            ))}
+            {visibleItems.map((item) => {
+                // Check if item has children (sub-menu)
+                const itemWithChildren = item as any;
+                if (itemWithChildren.children && itemWithChildren.children.length > 0) {
+                    return (
+                        <li key={item.url}>
+                            <DropdownMenu.Root>
+                                <DropdownMenu.Trigger asChild>
+                                    <button className="transition-200 block max-w-[200px] truncate text-ellipsis whitespace-nowrap rounded-full p-2 transition-colors hover:bg-white hover:text-black dark:hover:bg-neutral-800 dark:hover:text-white">
+                                        {item.label} ↓
+                                    </button>
+                                </DropdownMenu.Trigger>
+                                <DropdownMenu.Portal>
+                                    <DropdownMenu.Content
+                                        className="w-48 rounded border border-gray-300 bg-white text-neutral-950 shadow-md dark:border-neutral-800 dark:bg-neutral-900 dark:text-white"
+                                        align="start"
+                                        sideOffset={5}
+                                    >
+                                        {itemWithChildren.children.map((subItem: any) => (
+                                            <DropdownMenu.Item asChild key={subItem.url}>
+                                                <a
+                                                    href={subItem.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="transition-200 block truncate p-2 transition-colors hover:bg-slate-100 hover:text-black dark:hover:bg-neutral-800 dark:hover:text-white"
+                                                >
+                                                    {subItem.label}
+                                                </a>
+                                            </DropdownMenu.Item>
+                                        ))}
+                                    </DropdownMenu.Content>
+                                </DropdownMenu.Portal>
+                            </DropdownMenu.Root>
+                        </li>
+                    );
+                }
+                
+                // Regular menu item without sub-menu
+                return (
+                    <li key={item.url}>
+                        <a
+                            href={item.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="transition-200 block max-w-[200px] truncate text-ellipsis whitespace-nowrap rounded-full p-2 transition-colors hover:bg-white hover:text-black dark:hover:bg-neutral-800 dark:hover:text-white"
+                        >
+                            {item.label}
+                        </a>
+                    </li>
+                );
+            })}
 
             {hiddenItems.length > 0 && (
                 <li>
@@ -91,7 +148,7 @@ export const Header = () => {
                         />
 
                         {isSidebarVisible && (
-                            <PublicationSidebar navbarItems={navbarItems} toggleSidebar={toggleSidebar} />
+                            <PublicationSidebar navbarItems={navbarItemsWithSubMenus} toggleSidebar={toggleSidebar} />
                         )}
                     </div>
                     <div className="hidden lg:block text-neutral-900 dark:text-slate-300">

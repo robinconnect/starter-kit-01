@@ -16,12 +16,20 @@ type Props = {
 function PublicationSidebar(props: Props) {
 	const { toggleSidebar, navbarItems } = props;
 	const [isMounted, setIsMounted] = useState(false);
+	const [expandedItems, setExpandedItems] = useState<{ [key: string]: boolean }>({});
 	const { publication } = useAppContext();
 	const hasSocialLinks = !Object.values(publication.links!).every((val) => val === '');
 
 	useEffect(() => {
 		setIsMounted(true);
 	}, []);
+
+	const toggleExpanded = (itemLabel: string) => {
+		setExpandedItems(prev => ({
+			...prev,
+			[itemLabel]: !prev[itemLabel]
+		}));
+	};
 
 	return (
 		<DialogPrimitive.Root open>
@@ -77,16 +85,48 @@ function PublicationSidebar(props: Props) {
 										Home
 									</Link>
 								</li>
-								{navbarItems.map((item) => (
-									<li key={item.url}>
-										<Link
-											href={item.url}
-											className="transition-200 block truncate text-ellipsis whitespace-nowrap rounded p-2 px-3 transition-colors hover:bg-slate-100 hover:text-black dark:hover:bg-neutral-800 dark:hover:text-white"
-										>
-											{item.label}
-										</Link>
-									</li>
-								))}
+								{navbarItems.map((item) => {
+									const itemWithChildren = item as any;
+									const hasChildren = itemWithChildren.children && itemWithChildren.children.length > 0;
+									const isExpanded = expandedItems[item.label || ''];
+									
+									return (
+										<li key={item.url}>
+											{hasChildren ? (
+												<>
+													<button
+														onClick={() => toggleExpanded(item.label || '')}
+														className="transition-200 flex w-full items-center justify-between truncate text-ellipsis whitespace-nowrap rounded p-2 px-3 transition-colors hover:bg-slate-100 hover:text-black dark:hover:bg-neutral-800 dark:hover:text-white"
+													>
+														<span>{item.label}</span>
+														<span>{isExpanded ? '−' : '+'}</span>
+													</button>
+													{isExpanded && (
+														<ul className="ml-4 mt-2 flex flex-col gap-1">
+															{itemWithChildren.children.map((subItem: any) => (
+																<li key={subItem.url}>
+																	<Link
+																		href={subItem.url}
+																		className="transition-200 block truncate text-ellipsis whitespace-nowrap rounded p-2 px-3 text-sm transition-colors hover:bg-slate-100 hover:text-black dark:hover:bg-neutral-800 dark:hover:text-white"
+																	>
+																		{subItem.label}
+																	</Link>
+																</li>
+															))}
+														</ul>
+													)}
+												</>
+											) : (
+												<Link
+													href={item.url}
+													className="transition-200 block truncate text-ellipsis whitespace-nowrap rounded p-2 px-3 transition-colors hover:bg-slate-100 hover:text-black dark:hover:bg-neutral-800 dark:hover:text-white"
+												>
+													{item.label}
+												</Link>
+											)}
+										</li>
+									);
+								})}
 							</ul>
 						</section>
 
