@@ -154,6 +154,8 @@ export const Footer = () => {
 					<SocialLinks />
 					<p>&copy; 2025 RobinConnect</p>
 					<p>
+
+						{/*
 						<a href="#" className="hover:underline">
 							Privacy Policy
 						</a>{' '}
@@ -161,6 +163,8 @@ export const Footer = () => {
 						<a href="#" className="hover:underline">
 							Terms
 						</a>
+*/}
+
 					</p>
 				</div>
 			</Container>
