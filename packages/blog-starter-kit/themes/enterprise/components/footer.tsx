@@ -9,6 +9,7 @@ export const Footer = () => {
 	return (
 		<footer className="border-t py-20 dark:border-neutral-800 ">
 			<Container className="px-5">
+				{/*
 				{PUBLICATION_LOGO ? (
 					<div className="mb-20 flex w-full flex-row justify-center">
 						<Link
@@ -24,6 +25,7 @@ export const Footer = () => {
 						{publication.title}
 					</p>
 				)}
+					*/}
 				<div className="grid w-full grid-cols-3 gap-5 md:grid-cols-6 lg:grid-cols-5">
 					<div className="col-span-1 grid grid-cols-4 gap-5 md:col-span-4 lg:col-span-3">
 						<div className="col-span-full md:col-span-2 lg:col-span-1">
