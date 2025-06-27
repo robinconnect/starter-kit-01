@@ -32,6 +32,7 @@ export const Header = () => {
                     { label: "Supply Chain Solutions", url: "https://robinconnect.com/testing-08" },
                     { label: "Sub 2", url: "/china-assistant/sub2" },
                     { label: "Sub 3", url: "/china-assistant/sub3" },
+                    { label: "Sub 4", url: "/china-assistant/sub4" },
                 ]
             };
         }
