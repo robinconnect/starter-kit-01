@@ -156,7 +156,7 @@ export const Header = () => {
                 </div>
                 <div className="col-span-2 flex flex-row items-center justify-end gap-5 text-neutral-900 dark:text-slate-300 lg:col-span-3">
                     <nav className="hidden lg:block">{navList}</nav>
-                    <Button href={baseUrl} as="a" type="primary" label="Ask Robin" />
+                    <Button href="https://tally.so/r/wa1GN2" as="a" type="primary" label="Ask Robin" />
                     <ThemeToggle /> {/* Dark/Light mode button */}
                 </div>
             </Container>
