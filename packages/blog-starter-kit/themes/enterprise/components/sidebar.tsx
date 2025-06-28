@@ -94,13 +94,23 @@ function PublicationSidebar(props: Props) {
 										<li key={item.url}>
 											{hasChildren ? (
 												<>
-													<button
-														onClick={() => toggleExpanded(item.label || '')}
-														className="transition-200 flex w-full items-center justify-between truncate text-ellipsis whitespace-nowrap rounded p-2 px-3 transition-colors hover:bg-slate-100 hover:text-black dark:hover:bg-neutral-800 dark:hover:text-white"
-													>
-														<span>{item.label}</span>
-														<span>{isExpanded ? '−' : '+'}</span>
-													</button>
+													{/* Main page link */}
+													<div className="flex items-center">
+														<Link
+															href={item.url}
+															className="transition-200 block flex-1 truncate text-ellipsis whitespace-nowrap rounded-l p-2 px-3 transition-colors hover:bg-slate-100 hover:text-black dark:hover:bg-neutral-800 dark:hover:text-white"
+														>
+															{item.label}
+														</Link>
+														{/* Toggle button */}
+														<button
+															onClick={() => toggleExpanded(item.label || '')}
+															className="transition-200 px-3 py-2 rounded-r transition-colors hover:bg-slate-100 hover:text-black dark:hover:bg-neutral-800 dark:hover:text-white"
+														>
+															<span className="text-lg">{isExpanded ? '−' : '+'}</span>
+														</button>
+													</div>
+													{/* Sub-menu items */}
 													{isExpanded && (
 														<ul className="ml-4 mt-2 flex flex-col gap-1">
 															{itemWithChildren.children.map((subItem: any) => (
