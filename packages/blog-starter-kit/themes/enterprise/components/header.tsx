@@ -30,9 +30,9 @@ export const Header = () => {
                 ...item,
                 children: [
                     { label: "Supply Chain Solutions", url: "https://robinconnect.com/testing-08" },
-                    { label: "Sub 2", url: "/china-assistant/sub2" },
-                    { label: "Sub 3", url: "/china-assistant/sub3" },
-                    { label: "Sub 4", url: "/china-assistant/sub4" },
+                    { label: "Business Trip Assistance", url: "https://robinconnect.com/business-trip-assistance" },
+                    { label: "Industry Connections", url: "https://robinconnect.com/industry-connections" },
+                    { label: "Market Entry Support", url: "https://robinconnect.com/market-entry-support" },
                 ]
             };
         }
