@@ -29,9 +29,9 @@ export const Header = () => {
             return {
                 ...item,
                 children: [
-                    { label: "Supply Chain Solutions", url: "https://robinconnect.com/testing-08" },
-                    { label: "Business Trip Assistance", url: "https://robinconnect.com/business-trip-assistance" },
-                    { label: "Industry Connections", url: "https://robinconnect.com/industry-connections" },
+                    { label: "Supply Chain Solutions", url: "https://robinconnect.com/supply-chain-solutions" },
+                    { label: "On the Ground Support", url: "https://robinconnect.com/On-the-Ground-Support" },
+                    { label: "Business Connections", url: "https://robinconnect.com/business-connections" },
                     { label: "Market Entry Support", url: "https://robinconnect.com/market-entry-support" },
                 ]
             };
