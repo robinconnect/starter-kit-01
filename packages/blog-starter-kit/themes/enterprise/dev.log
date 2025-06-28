@@ -1,0 +1,68 @@
+
+> dev
+> concurrently "next" "pnpm codegen --watch" --names next,codegen
+
+[codegen] 
+[codegen] > @starter-kit/blog-enterprise@ codegen /Users/robinconnect/starter-kit-01/packages/blog-starter-kit/themes/enterprise
+[codegen] > graphql-codegen --config codegen.yml --watch
+[codegen] 
+[codegen] [STARTED] Parse Configuration
+[codegen] [SUCCESS] Parse Configuration
+[codegen] [STARTED] Generate outputs
+[codegen] [STARTED] Generate to ./generated/schema.graphql
+[codegen] [STARTED] Generate to ./generated/graphql.ts
+[codegen] [STARTED] Load GraphQL schemas
+[codegen] [STARTED] Load GraphQL schemas
+[codegen] [SUCCESS] Load GraphQL schemas
+[codegen] [SUCCESS] Load GraphQL schemas
+[codegen] [STARTED] Load GraphQL documents
+[codegen] [STARTED] Load GraphQL documents
+[codegen] [SUCCESS] Load GraphQL documents
+[codegen] [SUCCESS] Load GraphQL documents
+[codegen] [STARTED] Generate
+[codegen] [STARTED] Generate
+[codegen] [SUCCESS] Generate
+[codegen] [SUCCESS] Generate
+[codegen] [SUCCESS] Generate to ./generated/schema.graphql
+[codegen] [SUCCESS] Generate to ./generated/graphql.ts
+[codegen] [SUCCESS] Generate outputs
+[codegen]   ℹ Watching for changes in /Users/robinconnect/starter-kit-01/packages/blog-starter-kit/themes/enterprise...
+[next]   ▲ Next.js 13.5.11
+[next]   - Local:        http://localhost:3000
+[next]   - Environments: .env.local
+[next]   - Experiments (use at your own risk):
+[next]      · scrollRestoration
+[next] 
+[next]  ✓ Ready in 4.6s
+[next]  ✓ Compiled / in 940ms (663 modules)
+[next] Warning: React does not recognize the `fetchPriority` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `fetchpriority` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+[next]     at img
+[next]     at eval (webpack-internal:///../../../../node_modules/.pnpm/next@13.5.11_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/client/image-component.js:131:11)
+[next]     at eval (webpack-internal:///../../../../node_modules/.pnpm/next@13.5.11_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/client/image-component.js:238:47)
+[next]     at div
+[next]     at a
+[next]     at LinkComponent (webpack-internal:///../../../../node_modules/.pnpm/next@13.5.11_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/client/link.js:105:19)
+[next]     at div
+[next]     at CoverImage (webpack-internal:///./components/cover-image.tsx:14:23)
+[next]     at div
+[next]     at section
+[next]     at HeroPost (webpack-internal:///./components/hero-post.tsx:19:21)
+[next]     at div
+[next]     at div
+[next]     at div
+[next]     at Container (webpack-internal:///./components/container.tsx:8:22)
+[next]     at main
+[next]     at div
+[next]     at Layout (webpack-internal:///./components/layout.tsx:19:19)
+[next]     at AppProvider (webpack-internal:///./components/contexts/appContext.tsx:13:24)
+[next]     at Index (webpack-internal:///./pages/index.tsx:64:18)
+[next]     at G (/Users/robinconnect/starter-kit-01/node_modules/.pnpm/next-themes@0.3.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next-themes/dist/index.js:1:947)
+[next]     at B (/Users/robinconnect/starter-kit-01/node_modules/.pnpm/next-themes@0.3.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next-themes/dist/index.js:1:861)
+[next]     at MyApp (webpack-internal:///./pages/_app.tsx:17:18)
+[next]     at StyleRegistry (/Users/robinconnect/starter-kit-01/node_modules/.pnpm/styled-jsx@5.1.1_react@18.3.1/node_modules/styled-jsx/dist/index/index.js:449:36)
+[next]     at ek (/Users/robinconnect/starter-kit-01/node_modules/.pnpm/next@13.5.11_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages.runtime.dev.js:30:13126)
+[next]     at eY (/Users/robinconnect/starter-kit-01/node_modules/.pnpm/next@13.5.11_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages.runtime.dev.js:39:1766)
+[next]     at eV (/Users/robinconnect/starter-kit-01/node_modules/.pnpm/next@13.5.11_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages.runtime.dev.js:39:3110)
+[next]     at div
+[next]     at e1 (/Users/robinconnect/starter-kit-01/node_modules/.pnpm/next@13.5.11_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages.runtime.dev.js:48:761)
+[next]  ✓ Compiled in 1653ms (663 modules)
