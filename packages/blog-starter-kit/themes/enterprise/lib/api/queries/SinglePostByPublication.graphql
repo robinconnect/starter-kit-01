@@ -21,7 +21,6 @@ fragment PostFull on Post {
 	updatedAt
 	readTimeInMinutes
 	reactionCount
-	responseCount
 	hasLatexInPost
 	publication {
 		id
@@ -85,26 +84,6 @@ fragment PostFull on Post {
 				parentId
 				slug
 				title
-			}
-		}
-	}
-	preferences {
-		disableComments
-	}
-	comments(first: 25) {
-		totalDocuments
-		edges {
-			node {
-				id
-				totalReactions
-				content {
-					markdown
-				}
-				author {
-					name
-					username
-					profilePicture
-				}
 			}
 		}
 	}
