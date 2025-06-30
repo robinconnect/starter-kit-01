@@ -69,3 +69,7 @@
 [next]  ✓ Compiled in 662ms (663 modules)
 [next]  ✓ Compiled in 540ms (516 modules)
 [next]  ✓ Compiled in 1502ms (663 modules)
+[next]  ✓ Compiled in 1795ms (516 modules)
+[next] next exited with code SIGHUP
+[codegen]  ELIFECYCLE  Command failed.
+[codegen] pnpm codegen --watch exited with code SIGHUP

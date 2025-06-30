@@ -32,7 +32,7 @@ import { triggerCustomWidgetEmbed } from '@starter-kit/utils/trigger-custom-widg
 const AboutAuthor = dynamic(() => import('../components/about-author'), { ssr: false });
 const Subscribe = dynamic(() => import('../components/subscribe').then((mod) => mod.Subscribe));
 const PostComments = dynamic(() =>
-	import('../components/post-comments').then((mod) => mod.PostComments),
+	import('../components/post-comments-graphql').then((mod) => mod.PostCommentsGraphQL),
 );
 
 type PostProps = {
@@ -141,7 +141,7 @@ const Post = ({ publication, post }: PostProps) => {
 				</div>
 			)}
 			<AboutAuthor />
-			{!post.preferences.disableComments && post.comments.totalDocuments > 0 && <PostComments />}
+			{!post.preferences.disableComments && <PostComments />}
 			<Subscribe />
 		</>
 	);
