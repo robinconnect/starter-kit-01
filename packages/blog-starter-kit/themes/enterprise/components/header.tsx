@@ -8,6 +8,7 @@ import HamburgerSVG from './icons/svgs/HamburgerSVG';
 import { PublicationLogo } from './publication-logo';
 import PublicationSidebar from './sidebar';
 import ThemeToggle from './themetoggle';
+import { createLinkProps } from '../utils/link-helper';
 
 function hasUrl(
     navbarItem: PublicationNavbarItem,
@@ -71,7 +72,7 @@ export const Header = () => {
                                     {itemWithChildren.children.map((subItem: any, index: number) => (
                                         <a
                                             key={subItem.url}
-                                            href={subItem.url}
+                                            {...createLinkProps(subItem.url)}
                                             className={`block px-6 py-3 text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:bg-primary-50 dark:hover:bg-neutral-800 hover:text-primary-700 dark:hover:text-primary-400 transition-all duration-150 hover:pl-8 ${
                                                 index !== itemWithChildren.children.length - 1 ? 'border-b border-gray-50 dark:border-neutral-800' : ''
                                             }`}
@@ -89,7 +90,7 @@ export const Header = () => {
                 return (
                     <li key={item.url} className="group">
                         <a
-                            href={item.url}
+                            {...createLinkProps(item.url)}
                             className="uppercase tracking-wide font-medium hover:text-primary-600 focus:outline-none group-hover:text-primary-600 group-hover:underline px-4 py-3 transition-all duration-200 text-sm"
                         >
                             {item.label}
@@ -116,9 +117,7 @@ export const Header = () => {
                                 {hiddenItems.map((item) => (
                                     <DropdownMenu.Item asChild key={item.url}>
                                         <a
-                                            href={item.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
+                                            {...createLinkProps(item.url)}
                                             className="transition-200 block truncate p-2 transition-colors hover:bg-slate-100 hover:text-black dark:hover:bg-neutral-800 dark:hover:text-white"
                                         >
                                             {item.label}

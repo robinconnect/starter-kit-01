@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useAppContext } from './contexts/appContext';
 import { GithubSVG, HashnodeSVG, LinkedinSVG, RssSVG, XSVG } from './icons';
+import { createLinkProps } from '../utils/link-helper';
 
 export const SocialLinks = ({ isSidebar }: { isSidebar?: boolean }) => {
 	const { publication } = useAppContext();
@@ -18,9 +19,7 @@ export const SocialLinks = ({ isSidebar }: { isSidebar?: boolean }) => {
 					<>
 						{publication.links?.twitter && (
 							<a
-								href={publication.links.twitter}
-								target="_blank"
-								rel="noopener noreferrer"
+								{...createLinkProps(publication.links.twitter)}
 								aria-label="Find us on Twitter, external website, opens in new tab"
 								className="flex flex-row items-center justify-center rounded-full border border-slate-200 p-2 hover:bg-slate-100 dark:border-neutral-800 dark:hover:bg-neutral-600"
 							>
@@ -29,9 +28,7 @@ export const SocialLinks = ({ isSidebar }: { isSidebar?: boolean }) => {
 						)}
 						{publication.links?.github && (
 							<a
-								href={publication.links.github}
-								target="_blank"
-								rel="noopener noreferrer"
+								{...createLinkProps(publication.links.github)}
 								aria-label="Find us on Github, external website, opens in new tab"
 								className="flex flex-row items-center justify-center rounded-full border border-slate-200 p-2 hover:bg-slate-100 dark:border-neutral-800 dark:hover:bg-neutral-600"
 							>
@@ -40,9 +37,7 @@ export const SocialLinks = ({ isSidebar }: { isSidebar?: boolean }) => {
 						)}
 						{publication.links?.linkedin && (
 							<a
-								href={publication.links.linkedin}
-								target="_blank"
-								rel="noopener noreferrer"
+								{...createLinkProps(publication.links.linkedin)}
 								aria-label="Find us on Linkedin, external website, opens in new tab"
 								className="flex flex-row items-center justify-center rounded-full border border-slate-200 p-2 hover:bg-slate-100 dark:border-neutral-800 dark:hover:bg-neutral-600"
 							>
@@ -51,9 +46,7 @@ export const SocialLinks = ({ isSidebar }: { isSidebar?: boolean }) => {
 						)}
 						{publication.links?.hashnode && (
 							<a
-								href={publication.links.hashnode}
-								target="_blank"
-								rel="noopener noreferrer"
+								{...createLinkProps(publication.links.hashnode)}
 								aria-label="Find us on Hashnode, external website, opens in new tab"
 								className="flex flex-row items-center justify-center rounded-full border border-slate-200 p-2 hover:bg-slate-100 dark:border-neutral-800 dark:hover:bg-neutral-600"
 							>
@@ -63,16 +56,13 @@ export const SocialLinks = ({ isSidebar }: { isSidebar?: boolean }) => {
 					</>
 				)}
 
-				<Link
-					prefetch={false}
-					href={`/rss.xml`}
-					target="_blank"
-					rel="noopener noreferrer"
+				<a
+					{...createLinkProps('/rss.xml')}
 					aria-label="Open blog XML Feed, opens in new tab"
 					className="flex flex-row items-center justify-center rounded-full border border-slate-200 p-2 hover:bg-slate-100 dark:border-neutral-800 dark:hover:bg-neutral-600"
 				>
 					<RssSVG className="h-5 w-5 stroke-current" />
-				</Link>
+				</a>
 			</div>
 		</>
 	);

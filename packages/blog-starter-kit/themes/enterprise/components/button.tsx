@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+import { createLinkProps } from '../utils/link-helper';
 
 type Props = {
 	label: string;
@@ -9,12 +10,11 @@ type Props = {
 	href?: string;
 	onClick?: () => void;
 	as?: string;
-	rel?: string;
-	target?: string;
+	// Remove manual rel and target props - they'll be handled automatically
 };
 
 export const Button = forwardRef<HTMLButtonElement, Props>(
-	({ label, type, icon, className, secondaryIcon, href, rel, as, target, onClick }, ref) => {
+	({ label, type, icon, className, secondaryIcon, href, as, onClick }, ref) => {
 		let buttonClassName: string;
 
 		switch (type) {
@@ -38,24 +38,23 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
 					'text-white bg-primary-600 hover:bg-primary-500 border-primary-600 dark:bg-primary-600 dark:text-white';
 		}
 
-		if (as === 'a') {
-			return (
-				<a
-					href={href}
-					rel={rel}
-					target={target}
-					className={`flex flex-row items-center justify-start gap-2 rounded-full border px-2 py-2 text-sm font-semibold transition-colors duration-200 md:px-5 md:py-3 md:text-base ${buttonClassName} ${
-						secondaryIcon ? `md:justify-between` : `md:justify-center`
-					}  ${className}`}
-				>
-					<div className="flex flex-row items-center gap-2">
-						{icon && <div className="shrink-0">{icon}</div>}
-						{label || null}
-					</div>
-					{secondaryIcon && <div className="shrink-0">{secondaryIcon}</div>}
-				</a>
-			);
-		}
+	if (as === 'a' && href) {
+		const linkProps = createLinkProps(href);
+		return (
+			<a
+				{...linkProps}
+				className={`flex flex-row items-center justify-start gap-2 rounded-full border px-2 py-2 text-sm font-semibold transition-colors duration-200 md:px-5 md:py-3 md:text-base ${buttonClassName} ${
+					secondaryIcon ? `md:justify-between` : `md:justify-center`
+				}  ${className}`}
+			>
+				<div className="flex flex-row items-center gap-2">
+					{icon && <div className="shrink-0">{icon}</div>}
+					{label || null}
+				</div>
+				{secondaryIcon && <div className="shrink-0">{secondaryIcon}</div>}
+			</a>
+		);
+	}
 
 		return (
 			<button
