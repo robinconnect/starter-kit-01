@@ -40,8 +40,8 @@ export const Header = () => {
         return item;
     });
     
-    const visibleItems = navbarItemsWithSubMenus.slice(0, 3);
-    const hiddenItems = navbarItemsWithSubMenus.slice(3);
+    const visibleItems = navbarItemsWithSubMenus.slice(0, 4);
+    const hiddenItems = navbarItemsWithSubMenus.slice(4);
 
     const toggleSidebar = () => {
         setIsSidebarVisible((prevVisibility) => !prevVisibility);
