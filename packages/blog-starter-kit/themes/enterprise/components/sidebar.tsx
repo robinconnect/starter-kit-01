@@ -1,12 +1,13 @@
-import * as DialogPrimitive from '@radix-ui/react-dialog';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { PublicationNavbarItem } from '../generated/graphql';
 import { Button } from './button';
 import { useAppContext } from './contexts/appContext';
 import CloseSVG from './icons/svgs/CloseSVG';
 import { PublicationLogo } from './publication-logo';
 import { SocialLinks } from './social-links';
+import { isInternalLink, createLinkProps } from '../utils/link-helper';
 
 type Props = {
 	toggleSidebar: () => void;
@@ -80,6 +81,7 @@ function PublicationSidebar(props: Props) {
 								<li>
 									<Link
 										href="/"
+										onClick={toggleSidebar}
 										className="transition-200 block truncate text-ellipsis whitespace-nowrap rounded p-2 px-3 transition-colors hover:bg-slate-100 hover:text-black dark:hover:bg-neutral-800 dark:hover:text-white"
 									>
 										Home
@@ -98,6 +100,7 @@ function PublicationSidebar(props: Props) {
 													<div className="flex items-center">
 														<Link
 															href={item.url}
+															onClick={toggleSidebar}
 															className="transition-200 block flex-1 truncate text-ellipsis whitespace-nowrap rounded-l p-2 px-3 transition-colors hover:bg-slate-100 hover:text-black dark:hover:bg-neutral-800 dark:hover:text-white"
 														>
 															{item.label}
@@ -113,22 +116,38 @@ function PublicationSidebar(props: Props) {
 													{/* Sub-menu items */}
 													{isExpanded && (
 														<ul className="ml-4 mt-2 flex flex-col gap-1">
-															{itemWithChildren.children.map((subItem: any) => (
-																<li key={subItem.url}>
-																	<Link
-																		href={subItem.url}
-																		className="transition-200 block truncate text-ellipsis whitespace-nowrap rounded p-2 px-3 text-sm transition-colors hover:bg-slate-100 hover:text-black dark:hover:bg-neutral-800 dark:hover:text-white"
-																	>
-																		{subItem.label}
-																	</Link>
-																</li>
-															))}
+															{itemWithChildren.children.map((subItem: any) => {
+																const isExternal = !isInternalLink(subItem.url);
+																
+																return (
+																	<li key={subItem.url}>
+																		{isExternal ? (
+																			<a
+																				{...createLinkProps(subItem.url)}
+																				onClick={toggleSidebar}
+																				className="transition-200 block truncate text-ellipsis whitespace-nowrap rounded p-2 px-3 text-sm transition-colors hover:bg-slate-100 hover:text-black dark:hover:bg-neutral-800 dark:hover:text-white"
+																			>
+																				{subItem.label}
+																			</a>
+																		) : (
+																			<Link
+																				href={subItem.url}
+																				onClick={toggleSidebar}
+																				className="transition-200 block truncate text-ellipsis whitespace-nowrap rounded p-2 px-3 text-sm transition-colors hover:bg-slate-100 hover:text-black dark:hover:bg-neutral-800 dark:hover:text-white"
+																			>
+																				{subItem.label}
+																			</Link>
+																		)}
+																	</li>
+																);
+															})}
 														</ul>
 													)}
 												</>
 											) : (
 												<Link
 													href={item.url}
+													onClick={toggleSidebar}
 													className="transition-200 block truncate text-ellipsis whitespace-nowrap rounded p-2 px-3 transition-colors hover:bg-slate-100 hover:text-black dark:hover:bg-neutral-800 dark:hover:text-white"
 												>
 													{item.label}
